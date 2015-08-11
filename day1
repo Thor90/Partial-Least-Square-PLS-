@@ -1,0 +1,22 @@
+attach(datasheet1)
+library(plspm)
+names(datasheet1)
+
+COMP=c(0,0,0,0)
+SI=c(0,0,0,0)
+SUPP=c(0,0,0,0)
+INTENT=c(1,1,1,0)
+foot_path=rbind(COMP, SI, SUPP, INTENT)
+colnames(foot_path)=rownames(foot_path)
+foot_path
+innerplot(foot_path)
+
+foot_blocks=list(9:12, 13:17, 26:30, 18:25) #outer model
+
+foot_modes=c("A", 4) #reflective
+
+foot_pls=plspm(datasheet1, foot_path, foot_blocks, modes = foot_modes) #run plspm analysis
+
+plot(foot_pls)
+plot(foot_pls, what = "loadings", arr.width=0.1)
+plot(foot_pls, what="weights")
